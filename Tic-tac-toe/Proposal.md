@@ -11,6 +11,8 @@ Het doel van deze challenge is om functionele programmeerconcepten niet alleen t
 
 Tic-Tac-Toe lijkt op het eerste gezicht een eenvoudig spel, maar leent zich uitstekend voor het toepassen van functionele concepten zoals immutability, recursie en pure functies, met name bij het implementeren van een beslisalgoritme (minimax).
 
+* **Opmerking:** Dit voorstel is oorspronkelijk door de student in het Engels geschreven en vervolgens met behulp van ChatGPT netjes geformatteerd.
+
 ---
 
 ## Gekozen programmeertaal: Elixir
@@ -37,6 +39,73 @@ De AI moet zelfstandig optimale zetten kunnen bepalen op basis van de huidige sp
 - De focus ligt op de **spelregels en beslislogica**, niet op grafische presentatie.
 - De AI maakt gebruik van een **minimax-algoritme** om optimale zetten te kiezen.
 
+--- 
+
+## Gefaseerde Implementatie & Moeilijkheidsniveaus
+
+De implementatie van het spel wordt gefaseerd opgebouwd, waarbij elke fase een hoger niveau van complexiteit en functioneel inzicht introduceert.  
+Dit maakt het mogelijk om het project zowel toegankelijk als uitbreidbaar te houden.
+
+### Fase 1 – Basis Tic-Tac-Toe (Beginner)
+- Mens tegen mens
+- Vast spelbord (3×3)
+- Validatie van zetten
+- Detectie van winst, verlies of gelijkspel
+
+**Focus:**  
+- Pure functies  
+- Immutability  
+- Basale recursie / patroonherkenning  
+
+---
+
+### Fase 2 – Simpele AI (Gemiddeld)
+- Mens tegen computer
+- AI kiest een willekeurige geldige zet
+
+**Focus:**  
+- Scheiding tussen spelregels en beslislogica  
+- Gebruik van higher-order functions  
+- Voorbereiding op complexere AI  
+
+---
+
+### Fase 3 – Minimax AI (Gevorderd)
+- Implementatie van het minimax-algoritme
+- AI kiest optimale zetten
+- Evaluatie van speltoestanden (win/verlies/gelijkspel)
+
+**Focus:**  
+- Recursie  
+- Boomstructuren van speltoestanden  
+- Declaratief denken  
+
+---
+
+### Fase 4 – Moeilijkheidsniveaus (Expert)
+- Meerdere AI-niveaus:
+  - *Easy*: willekeurige zetten  
+  - *Medium*: beperkte diepte in minimax  
+  - *Hard*: volledige minimax  
+
+**Focus:**  
+- Beheersing van complexiteit  
+- Performance-afwegingen  
+- Bewuste keuzes in algoritmisch ontwerp  
+
+---
+
+### (Optioneel) Fase 5 – Optimalisatie & Experimentatie
+- Optimalisaties zoals:
+  - beperking van zoekdiepte
+  - vroegtijdig afbreken van recursie
+- Experimenteren met alternatieve evaluatiefuncties
+
+**Focus:**  
+- Reflectie op algoritmische keuzes  
+- Vergelijking met imperatieve aanpak  
+
+
 ---
 
 ## Functionele aanpak
@@ -60,7 +129,7 @@ Deze functies hebben:
 
 ## AI-algoritme: Minimax
 
-De AI maakt gebruik van het **minimax-algoritme**, dat recursief alle mogelijke toekomstige speltoestanden evalueert.
+De AI maakt als goal gebruik van het **minimax-algoritme**, dat recursief alle mogelijke toekomstige speltoestanden evalueert.
 
 ### Waarom minimax geschikt is
 - Het algoritme is **van nature recursief**
@@ -99,16 +168,6 @@ De AI maakt gebruik van het **minimax-algoritme**, dat recursief alle mogelijke 
 
 ---
 
-## Reflectie (vooruitblik)
-
-In het bijbehorende rapport zal worden gereflecteerd op:
-- De voordelen van immutability bij het modelleren van speltoestanden
-- De leesbaarheid en structuur van recursieve oplossingen
-- De verschillen met een imperatieve of objectgeoriënteerde aanpak
-- Welke functionele concepten intuïtief waren en welke lastig
-
----
-
 ## Conclusie
 Deze challenge combineert een overzichtelijk probleem met voldoende diepgang om het functionele paradigma te onderzoeken en toe te passen.  
 Door het gebruik van Elixir en een AI-algoritme zoals minimax wordt op een concrete en begrijpelijke manier aangetoond hoe functionele programmeerconcepten samenwerken in een realistisch algoritme.
@@ -117,6 +176,4 @@ Door het gebruik van Elixir en een AI-algoritme zoals minimax wordt op een concr
 
 ## Bronnen (voorlopig)
 - Elixir officiële documentatie
-- Literatuur over functioneel programmeren
-- College materiaal
-- (Indien gebruikt) ChatGPT – vermeld met links naar relevante conversaties
+- ChatGPT – formatteren
