@@ -206,9 +206,10 @@ De bordlogica bestaat uit pure functies. Deze functies hebben geen bijwerkingen 
 
 Voorbeelden:
 
-apply_move(board, position, player)  
-valid_moves(board)  
-valid_move?(board, position)
+* apply_move(board, position, player)  
+* valid_moves(board)  
+* winner(board)  
+* game_over?(board)
 
 Omdat deze functies geen externe toestand veranderen, blijven ze eenvoudig te testen en te begrijpen.
 
@@ -218,11 +219,51 @@ Omdat deze functies geen externe toestand veranderen, blijven ze eenvoudig te te
 
 Voor het analyseren van het bord wordt gebruik gemaakt van functies uit de Enum module, zoals:
 
-Enum.filter  
-Enum.map  
-Enum.any?
+* Enum.filter  
+* Enum.map  
+* Enum.any?
 
 Deze functies verwerken lijsten op een declaratieve manier. Hierdoor blijft de code compact en duidelijk.
+
+---
+
+## Wincondities
+
+Om te bepalen of een speler gewonnen heeft, worden alle mogelijke winnende patronen gedefinieerd als data.
+
+Voor Tic-Tac-Toe zijn dit de volgende combinaties:
+
+[0,1,2]  
+[3,4,5]  
+[6,7,8]  
+[0,3,6]  
+[1,4,7]  
+[2,5,8]  
+[0,4,8]  
+[2,4,6]
+
+Door deze patronen als data te definiëren kan het programma eenvoudig controleren of een speler een winnende combinatie heeft.
+
+De functie `winner(board)` doorloopt deze patronen en controleert of drie posities dezelfde speler bevatten.
+
+Dit is een declaratieve aanpak: de regels van het spel worden eerst als data beschreven en daarna geëvalueerd door functies.
+
+---
+
+## Detectie van het einde van het spel
+
+Het programma moet kunnen bepalen wanneer een spel afgelopen is.
+
+Dit gebeurt in de functie:
+
+game_over?(board)
+
+Een spel eindigt wanneer:
+
+- een speler heeft gewonnen
+- er geen geldige zetten meer over zijn
+
+Deze functie combineert de resultaten van `winner(board)` en `valid_moves(board)` om te bepalen of het spel beëindigd moet worden.
 
 ---
 
@@ -232,9 +273,9 @@ Pattern matching wordt gebruikt om verschillende bordwaarden om te zetten naar s
 
 Bijvoorbeeld:
 
-symbol(:x) -> "X"  
-symbol(:o) -> "O"  
-symbol(:empty) -> "_"
+* symbol(:x) -> "X"  
+* symbol(:o) -> "O"  
+* symbol(:empty) -> "_"*
 
 Deze aanpak maakt het eenvoudig om verschillende gevallen te behandelen zonder complexe if-structuren.
 
