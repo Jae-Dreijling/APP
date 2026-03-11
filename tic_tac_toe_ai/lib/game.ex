@@ -20,7 +20,12 @@ defmodule Game do
     if Board.game_over?(board) do
       end_game(board)
     else
-      position = ask_move(player)
+      position =
+        if player == :x do
+          ask_move(player)
+        else
+          AI.random_move(board)
+        end
 
       if position in Board.valid_moves(board) do
         new_board = Board.apply_move(board, position, player)

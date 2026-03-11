@@ -1,6 +1,9 @@
 defmodule AI do
 
-  # This module will later contain the minimax algorithm.
-  # The AI will evaluate board states and select the best move.
+  # Choose a random valid move
+  def random_move(board) do
+    moves = Board.valid_moves(board)
+    Enum.random(moves)
+  end
 
 end
