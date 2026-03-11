@@ -176,6 +176,68 @@ De logica van het programma wordt verdeeld over meerdere modules:
 
 Deze structuur helpt om functionaliteit te scheiden in **kleine, herbruikbare functies**, wat goed aansluit bij het functionele paradigma.
 
+## Spelbord representatie
+
+De eerste stap in de implementatie was het ontwerpen van een geschikte datastructuur voor het spelbord.
+
+Het bord wordt gerepresenteerd als een lijst met negen elementen. Elke positie in de lijst komt overeen met een vakje op het Tic-Tac-Toe bord.
+
+Indexstructuur:
+
+0 1 2  
+3 4 5  
+6 7 8  
+
+Een voorbeeld van een bordtoestand:
+
+[:x, :o, :empty,
+ :empty, :x, :empty,
+ :o, :empty, :empty]
+
+Deze representatie sluit goed aan bij het functionele paradigma. In plaats van het bord direct te wijzigen, genereert elke zet een **nieuwe bordtoestand**. De oorspronkelijke toestand blijft onveranderd.
+
+Dit illustreert het concept **immutability**.
+
+---
+
+## Pure functies
+
+De bordlogica bestaat uit pure functies. Deze functies hebben geen bijwerkingen en geven altijd dezelfde output bij dezelfde input.
+
+Voorbeelden:
+
+apply_move(board, position, player)  
+valid_moves(board)  
+valid_move?(board, position)
+
+Omdat deze functies geen externe toestand veranderen, blijven ze eenvoudig te testen en te begrijpen.
+
+---
+
+## Higher order functions
+
+Voor het analyseren van het bord wordt gebruik gemaakt van functies uit de Enum module, zoals:
+
+Enum.filter  
+Enum.map  
+Enum.any?
+
+Deze functies verwerken lijsten op een declaratieve manier. Hierdoor blijft de code compact en duidelijk.
+
+---
+
+## Pattern matching
+
+Pattern matching wordt gebruikt om verschillende bordwaarden om te zetten naar symbolen die op het scherm worden weergegeven.
+
+Bijvoorbeeld:
+
+symbol(:x) -> "X"  
+symbol(:o) -> "O"  
+symbol(:empty) -> "_"
+
+Deze aanpak maakt het eenvoudig om verschillende gevallen te behandelen zonder complexe if-structuren.
+
 ---
 
 ## Versiebeheer
