@@ -1,6 +1,10 @@
 # Tic-Tac-Toe AI in Elixir  
 ## Functioneel Paradigma Challenge
 
+Jae Dreijling (2131248)
+APP - 13-3-2026
+
+
 ---
 
 # Inleiding
