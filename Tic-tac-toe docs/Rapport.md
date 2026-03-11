@@ -106,7 +106,7 @@ Deze functies maken het mogelijk om collecties op een declaratieve manier te ver
 
 Het doel van de challenge is het ontwikkelen van een Tic-Tac-Toe spel waarin een menselijke speler het opneemt tegen een computertegenstander.
 
-De AI neemt beslissingen op basis van de huidige speltoestand. Eerst wordt een eenvoudige willekeurige strategie geïmplementeerd om het spel speelbaar te maken. Daarna wordt het minimax-algoritme toegevoegd zodat de AI optimale zetten kan bepalen.
+De AI neemt beslissingen op basis van de huidige speltoestand. Eerst wordt een eenvoudige willekeurige strategie geïmplementeerd om het spel speelbaar te maken. Daarna wordt het minimax-algoritme toegevoegd zodat de AI optimale zetten kan bepalen. Uiteindelijk worden meerdere moeilijkheidsniveaus toegevoegd zodat verschillende AI strategieën gebruikt kunnen worden.
 
 ---
 
@@ -156,6 +156,10 @@ De implementatie wordt opgesplitst in meerdere fasen:
 - evaluatie van mogelijke speltoestanden
 - selectie van de optimale zet
 
+### Fase 7 — Moeilijkheidsniveaus
+- meerdere AI strategieën
+- eenvoudige selectie van AI gedrag
+- vergelijking tussen willekeurige en optimale strategie
 ---
 
 # Implementatie
@@ -357,6 +361,25 @@ Door alle mogelijke zetten te evalueren kan de AI bepalen welke zet uiteindelijk
 De implementatie maakt intensief gebruik van **recursie**. Voor elke mogelijke zet wordt de functie opnieuw aangeroepen met een nieuwe bordtoestand.
 
 Omdat elke zet een nieuw bord genereert en het oorspronkelijke bord onveranderd blijft, sluit deze aanpak goed aan bij het concept **immutability**.
+
+---
+
+## Moeilijkheidsniveaus
+
+Na de implementatie van het minimax-algoritme zijn meerdere moeilijkheidsniveaus toegevoegd aan de AI.
+
+De AI kan nu drie verschillende strategieën gebruiken:
+
+Easy  
+De AI kiest volledig willekeurige zetten uit alle geldige zetten.
+
+Medium  
+De AI kiest soms een willekeurige zet en soms een zet gebaseerd op het minimax-algoritme.
+
+Hard  
+De AI gebruikt altijd het minimax-algoritme en speelt daardoor optimaal.
+
+Door deze niveaus toe te voegen wordt het mogelijk om het verschil te zien tussen eenvoudige en strategische besluitvorming. Dit maakt het gedrag van het algoritme beter te analyseren.
 
 ---
 
