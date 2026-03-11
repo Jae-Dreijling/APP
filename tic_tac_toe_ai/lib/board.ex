@@ -32,6 +32,12 @@ defmodule Board do
   defp symbol(:x), do: "X"
   defp symbol(:o), do: "O"
 
+  # Return the value at a board position
+  # This helper keeps board access consistent
+  def get(board, position) do
+    Enum.at(board, position)
+  end
+
 
   # Return all positions that are still empty
   # This function scans the board and returns indexes
@@ -66,9 +72,9 @@ defmodule Board do
   def winner(board) do
     Enum.find_value(win_patterns(), fn [a, b, c] ->
 
-      v1 = Enum.at(board, a)
-      v2 = Enum.at(board, b)
-      v3 = Enum.at(board, c)
+      v1 = get(board, a)
+      v2 = get(board, b)
+      v3 = get(board, c)
 
       if v1 != :empty and v1 == v2 and v2 == v3 do
         v1
