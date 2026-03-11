@@ -136,14 +136,21 @@ De implementatie wordt opgesplitst in meerdere fasen:
 - validatie van zetten
 - detectie van winst of gelijkspel
 
-### Fase 3 — Simpele AI
+### Fase 3 — Spelregels
+- detectie van winst
+- bepalen van geldige zetten
+- detectie van gelijkspel
+
+### Fase 4 — Spelverloop
+- implementatie van de game loop
+- beurtwisseling tussen spelers
+- invoer van spelers via de command line
+
+### Fase 5 — Simpele AI
 - computer kiest willekeurige geldige zetten
 
-### Fase 4 — Minimax AI
+### Fase 6 — Minimax AI
 - implementatie van het minimax-algoritme
-
-### Fase 5 — Moeilijkheidsniveaus
-- verschillende AI strategieën (easy, medium, hard)
 
 ---
 
@@ -173,6 +180,10 @@ De logica van het programma wordt verdeeld over meerdere modules:
 | `game.ex` | spelregels |
 | `ai.ex` | AI beslislogica |
 | `cli.ex` | interactie met de speler |
+
+De module `Game` beheert het spelverloop. Deze module bevat de recursieve game loop die het spel blijft uitvoeren totdat een eindtoestand wordt bereikt.
+
+Door het spelverloop te scheiden van de bordlogica blijft de code overzichtelijk. De module `Board` bevat functies die de bordtoestand analyseren, terwijl `Game` verantwoordelijk is voor de volgorde waarin deze functies worden aangeroepen.
 
 Deze structuur helpt om functionaliteit te scheiden in **kleine, herbruikbare functies**, wat goed aansluit bij het functionele paradigma.
 
@@ -210,6 +221,7 @@ Voorbeelden:
 * valid_moves(board)  
 * winner(board)  
 * game_over?(board)
+* next_player(player)
 
 Omdat deze functies geen externe toestand veranderen, blijven ze eenvoudig te testen en te begrijpen.
 
@@ -279,6 +291,28 @@ Bijvoorbeeld:
 
 Deze aanpak maakt het eenvoudig om verschillende gevallen te behandelen zonder complexe if-structuren.
 
+---
+## Recursie voor spelverloop
+
+Het spelverloop wordt geïmplementeerd met behulp van **recursie**.
+
+In plaats van een traditionele lus (zoals een while-loop) wordt een functie gebruikt die zichzelf opnieuw aanroept totdat het spel afgelopen is.
+
+De functie `loop(board, player)` voert de volgende stappen uit:
+
+- toon het huidige bord
+- vraag een zet aan de speler
+- genereer een nieuwe bordtoestand
+- wissel van speler
+- roep de functie opnieuw aan
+
+Wanneer het spel afgelopen is wordt de recursie beëindigd.
+
+Deze aanpak sluit goed aan bij het functionele paradigma, omdat:
+
+- er geen mutabele state nodig is
+- elke spelzet een nieuwe bordtoestand genereert
+- de spelstroom volledig wordt bepaald door functieresultaten
 ---
 
 ## Versiebeheer
