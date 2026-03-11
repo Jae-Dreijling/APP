@@ -4,7 +4,6 @@
 Jae Dreijling (2131248)
 APP - 13-3-2026
 
-
 ---
 
 # Inleiding
@@ -306,17 +305,33 @@ Het gebruik van versiebeheer maakt het mogelijk om de ontwikkeling van het proje
 
 # Reflectie
 
-*(Wordt later ingevuld tijdens verdere implementatiefasen.)*
+Voor deze opdracht werkte ik voor het eerst echt met een functionele programmeertaal. Mijn ervaring lag hiervoor vooral bij objectgeoriënteerd programmeren, waardoor de manier van denken in het begin vrij onnatuurlijk voelde.
+
+In OOP werk je vaak met objecten waarvan de state verandert. In Elixir werkt dat anders, omdat data immutabel is. In plaats van iets aan te passen moet je steeds een nieuwe waarde creëren. In het begin was dat wennen, omdat ik automatisch nog probeerde te denken in termen van aanpassingen aan bestaande data.
+
+Het gebruik van pure functies vond ik uiteindelijk wel prettig. Functies zoals `valid_moves` en `winner` doen één duidelijke taak en hebben geen bijwerkingen. Daardoor zijn ze relatief makkelijk te begrijpen en te testen.
+
+Recursie was een ander punt waar ik aan moest wennen. Normaal gebruik ik loops, maar in dit project wordt het spelverloop met een recursieve functie uitgevoerd. Na verloop van tijd werd duidelijk dat dit goed past bij de functionele aanpak.
+
+Persoonlijk denk ik nog steeds sneller in een objectgeoriënteerde structuur, omdat ik daar meer ervaring mee heb, en beter kan visualizeren wat er gebeurt via de code. Tegelijkertijd heeft deze opdracht laten zien dat functioneel programmeren een andere manier biedt om problemen te structureren, vooral wanneer het belangrijk is dat data niet onverwacht verandert.
+
+Deze opdracht was daardoor een goede leerervaring. Het dwong mij om toch anders naar programmalogica te kijken en beter na te denken over hoe data door een programma stroomt.
 
 ---
 
 # Conclusie
 
-*(Wordt ingevuld nadat de implementatie voltooid is.)*
+In deze opdracht is een Tic-Tac-Toe spel met een AI ontwikkeld in de functionele programmeertaal Elixir. Tijdens het project zijn verschillende functionele concepten toegepast, zoals immutability, pure functies, recursie en higher-order functions.
+
+Door het spel stap voor stap op te bouwen werd duidelijk hoe deze concepten samenwerken binnen een praktisch algoritme, zoals het minimax-algoritme voor de AI.
+
+Hoewel het functionele paradigma in het begin minder intuïtief voelde dan objectgeoriënteerd programmeren, heeft deze opdracht geholpen om beter te begrijpen hoe functionele programma’s zijn opgebouwd.
+
+Het project laat zien dat functioneel programmeren een duidelijke en gestructureerde manier kan bieden om problemen op te lossen, vooral wanneer data onveranderlijk blijft en logica wordt opgebouwd uit kleine, zelfstandige functies.
 
 ---
 
-# Gebruik van GenAI
+### Gebruik van GenAI
 
 Tijdens het schrijven van dit rapport is **ChatGPT** gebruikt als hulpmiddel.
 
@@ -327,9 +342,3 @@ De rol van ChatGPT in dit proces was:
 - het formatteren van de tekst in Markdown
 
 De inhoudelijke keuzes, structuur van de opdracht en technische beslissingen zijn door de student zelf gemaakt. ChatGPT werd uitsluitend gebruikt om bestaande ideeën duidelijker en consistenter te formuleren.
-
----
-
-# Bronvermelding
-
-*(Wordt later aangevuld)*
