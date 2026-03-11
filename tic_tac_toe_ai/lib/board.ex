@@ -1,46 +1,20 @@
 defmodule Board do
-  @moduledoc """
-  This module handles the Tic-Tac-Toe board itself.
 
-  Board design:
-  [:x, :o, :empty,
-   :empty, :x, :empty,
-   :o, :empty, :empty]
-
-  Each move returns a new board. (pure functions)
-  The original board stays unchanged. (immutability)
-  """
-
-  # Create a new empty board
+  # Create an empty board
   def new_board do
     List.duplicate(:empty, 9)
   end
 
+
   # Apply a move to the board
-  # position must be between 0 and 8
+  # This function does not modify the original board.
+  # It returns a new board with the updated value.
   def apply_move(board, position, player) do
     List.replace_at(board, position, player)
   end
 
-  # Return all valid moves
-  def valid_moves(board) do
-    board
-    |> Enum.with_index()
-    |> Enum.filter(fn {value, _index} -> value == :empty end)
-    |> Enum.map(fn {_value, index} -> index end)
-  end
 
-  # Check if a position is free
-  def valid_move?(board, position) do
-    Enum.at(board, position) == :empty
-  end
-
-  # Check if the board is full
-  def full?(board) do
-    not Enum.any?(board, fn cell -> cell == :empty end)
-  end
-
-  # Print the board in a readable format
+  # Print the board to the console
   def print_board(board) do
     board
     |> Enum.chunk_every(3)
@@ -52,8 +26,69 @@ defmodule Board do
     end)
   end
 
-  # Convert internal symbols into printable values
+
+  # Convert internal values to printable symbols
+  defp symbol(:empty), do: "_"
   defp symbol(:x), do: "X"
   defp symbol(:o), do: "O"
-  defp symbol(:empty), do: "_"
+
+
+  # Return all positions that are still empty
+  # This function scans the board and returns indexes
+  # where moves are still possible
+  def valid_moves(board) do
+    board
+    |> Enum.with_index()
+    |> Enum.filter(fn {cell, _} -> cell == :empty end)
+    |> Enum.map(fn {_, index} -> index end)
+  end
+
+
+  # All possible winning combinations
+  # Instead of hardcoding many if statements we define
+  # the winning patterns as data.
+  def win_patterns do
+    [
+      [0,1,2],
+      [3,4,5],
+      [6,7,8],
+      [0,3,6],
+      [1,4,7],
+      [2,5,8],
+      [0,4,8],
+      [2,4,6]
+    ]
+  end
+
+
+  # Check if someone won the game
+  # This function iterates over all win patterns
+  def winner(board) do
+    Enum.find_value(win_patterns(), fn [a, b, c] ->
+
+      v1 = Enum.at(board, a)
+      v2 = Enum.at(board, b)
+      v3 = Enum.at(board, c)
+
+      if v1 != :empty and v1 == v2 and v2 == v3 do
+        v1
+      else
+        nil
+      end
+    end)
+  end
+
+
+  # Determine if the game has ended
+  # The game ends when someone wins
+  # or when no valid moves remain
+  def game_over?(board) do
+    winner(board) != nil or valid_moves(board) == []
+  end
+
+
+  # Switch the active player
+  def next_player(:x), do: :o
+  def next_player(:o), do: :x
+
 end
