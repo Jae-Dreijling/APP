@@ -106,7 +106,7 @@ Deze functies maken het mogelijk om collecties op een declaratieve manier te ver
 
 Het doel van de challenge is het ontwikkelen van een Tic-Tac-Toe spel waarin een menselijke speler het opneemt tegen een computertegenstander.
 
-De AI moet zelfstandig beslissingen nemen op basis van de huidige speltoestand. In eerste instantie gebeurt dit met een eenvoudige willekeurige strategie. In een latere fase wordt dit uitgebreid met het minimax-algoritme zodat de AI optimale zetten kan bepalen.
+De AI neemt beslissingen op basis van de huidige speltoestand. Eerst wordt een eenvoudige willekeurige strategie geïmplementeerd om het spel speelbaar te maken. Daarna wordt het minimax-algoritme toegevoegd zodat de AI optimale zetten kan bepalen.
 
 ---
 
@@ -153,6 +153,8 @@ De implementatie wordt opgesplitst in meerdere fasen:
 
 ### Fase 6 — Minimax AI
 - implementatie van het minimax-algoritme
+- evaluatie van mogelijke speltoestanden
+- selectie van de optimale zet
 
 ---
 
@@ -335,6 +337,26 @@ De implementatie gebruikt hiervoor:
 Enum.random(valid_moves)
 
 Deze eenvoudige strategie maakt het mogelijk om het spel al volledig te spelen tegen een computertegenstander. Tegelijkertijd vormt dit een goede basis voor de latere implementatie van het minimax-algoritme, waarbij de AI niet willekeurig maar strategisch optimale zetten kiest.
+
+---
+
+## Minimax algoritme
+
+Na de implementatie van een eenvoudige AI werd het minimax-algoritme toegevoegd.
+
+Het minimax-algoritme onderzoekt alle mogelijke toekomstige speltoestanden om de beste zet te bepalen. Voor elke mogelijke zet wordt het spel verder gesimuleerd totdat een eindtoestand wordt bereikt.
+
+Elke eindtoestand krijgt een score:
+
+- winst voor de AI → score 1
+- gelijkspel → score 0
+- verlies voor de AI → score -1
+
+Door alle mogelijke zetten te evalueren kan de AI bepalen welke zet uiteindelijk de beste uitkomst oplevert.
+
+De implementatie maakt intensief gebruik van **recursie**. Voor elke mogelijke zet wordt de functie opnieuw aangeroepen met een nieuwe bordtoestand.
+
+Omdat elke zet een nieuw bord genereert en het oorspronkelijke bord onveranderd blijft, sluit deze aanpak goed aan bij het concept **immutability**.
 
 ---
 
