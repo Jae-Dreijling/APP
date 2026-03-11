@@ -106,7 +106,7 @@ Deze functies maken het mogelijk om collecties op een declaratieve manier te ver
 
 Het doel van de challenge is het ontwikkelen van een Tic-Tac-Toe spel waarin een menselijke speler het opneemt tegen een computertegenstander.
 
-De AI moet zelfstandig beslissingen nemen op basis van de huidige speltoestand en proberen een optimale zet te kiezen.
+De AI moet zelfstandig beslissingen nemen op basis van de huidige speltoestand. In eerste instantie gebeurt dit met een eenvoudige willekeurige strategie. In een latere fase wordt dit uitgebreid met het minimax-algoritme zodat de AI optimale zetten kan bepalen.
 
 ---
 
@@ -148,6 +148,8 @@ De implementatie wordt opgesplitst in meerdere fasen:
 
 ### Fase 5 — Simpele AI
 - computer kiest willekeurige geldige zetten
+- implementatie van een AI module
+- integratie van AI in de game loop
 
 ### Fase 6 — Minimax AI
 - implementatie van het minimax-algoritme
@@ -291,7 +293,8 @@ Bijvoorbeeld:
 
 Deze aanpak maakt het eenvoudig om verschillende gevallen te behandelen zonder complexe if-structuren.
 
----
+--- 
+
 ## Recursie voor spelverloop
 
 Het spelverloop wordt geïmplementeerd met behulp van **recursie**.
@@ -313,6 +316,26 @@ Deze aanpak sluit goed aan bij het functionele paradigma, omdat:
 - er geen mutabele state nodig is
 - elke spelzet een nieuwe bordtoestand genereert
 - de spelstroom volledig wordt bepaald door functieresultaten
+---
+
+## Simpele AI strategie
+
+Voordat het minimax-algoritme wordt geïmplementeerd, is eerst een eenvoudige AI ontwikkeld.
+
+Deze AI kiest willekeurig een geldige zet uit alle beschikbare zetten op het bord.
+
+De functie in de AI module werkt als volgt:
+
+1. bepaal alle geldige zetten met `valid_moves(board)`
+2. kies willekeurig één van deze zetten
+3. voer deze zet uit
+
+De implementatie gebruikt hiervoor:
+
+Enum.random(valid_moves)
+
+Deze eenvoudige strategie maakt het mogelijk om het spel al volledig te spelen tegen een computertegenstander. Tegelijkertijd vormt dit een goede basis voor de latere implementatie van het minimax-algoritme, waarbij de AI niet willekeurig maar strategisch optimale zetten kiest.
+
 ---
 
 ## Versiebeheer
