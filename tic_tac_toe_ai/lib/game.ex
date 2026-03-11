@@ -4,15 +4,16 @@ defmodule Game do
   def start do
     board = Board.new_board()
     player = :x
+    difficulty = :hard
 
-    loop(board, player)
+    loop(board, player, difficulty)
   end
 
 
   # Main game loop
   # This function controls the game flow.
   # It prints the board, asks for input, and continues until the game ends.
-  def loop(board, player) do
+  def loop(board, player, difficulty) do
     IO.puts("")
     Board.print_board(board)
     IO.puts("")
@@ -24,17 +25,17 @@ defmodule Game do
         if player == :x do
           ask_move(player)
         else
-          AI.best_move(board, player)
+          AI.choose_move(board, player, difficulty)
         end
 
       if position in Board.valid_moves(board) do
         new_board = Board.apply_move(board, position, player)
         next_player = Board.next_player(player)
 
-        loop(new_board, next_player)
+        loop(new_board, next_player, difficulty)
       else
         IO.puts("Invalid move. Try again.")
-        loop(board, player)
+        loop(board, player, difficulty)
       end
     end
   end
