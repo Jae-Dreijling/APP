@@ -1,14 +1,5 @@
 defmodule Game do
 
-  # Start a new game
-  def start do
-    board = Board.new_board()
-    player = :x
-    difficulty = :hard
-
-    loop(board, player, difficulty)
-  end
-
 
   # Main game loop
   # This function controls the game flow.
@@ -47,9 +38,12 @@ defmodule Game do
       IO.gets("Player #{player}, choose a position (0-8): ")
       |> String.trim()
 
-    {number, _} = Integer.parse(input)
-
-    number
+    case Integer.parse(input) do
+      {number, _} -> number
+      :error ->
+        IO.puts("Invalid input. Try again.")
+        ask_move(player)
+    end
   end
 
 

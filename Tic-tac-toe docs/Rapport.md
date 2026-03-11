@@ -34,69 +34,22 @@ Deze eigenschappen maken Elixir geschikt om het functionele paradigma in een rel
 
 ## Functionele concepten
 
-### Pure Functions
+In dit project worden meerdere kernconcepten van functioneel programmeren toegepast.
 
-Een pure functie is een functie die:
+##### Pure functions  
+Functies hebben geen bijwerkingen en produceren altijd dezelfde output voor dezelfde input.
 
-- altijd dezelfde output geeft voor dezelfde input
-- geen bijwerkingen heeft
+##### Immutability  
+Speltoestanden worden niet aangepast maar vervangen door nieuwe waarden.
 
-Dit betekent dat de functie geen globale variabelen verandert en geen externe toestand beïnvloedt.
+##### Recursie  
+Recursie wordt gebruikt in plaats van traditionele lussen, bijvoorbeeld in het spelverloop en het minimax-algoritme.
 
-Voorbeelden in het Tic-Tac-Toe project zullen onder andere functies zijn die:
+##### Pattern matching  
+Wordt gebruikt om verschillende speltoestanden te herkennen.
 
-- controleren of een speler gewonnen heeft
-- mogelijke zetten genereren
-- een nieuwe speltoestand berekenen
-
----
-
-### Immutability
-
-Immutability betekent dat data niet kan worden aangepast nadat deze is aangemaakt. In plaats daarvan wordt een nieuwe waarde gecreëerd.
-
-Binnen het Tic-Tac-Toe spel betekent dit dat een nieuwe spelzet niet het bestaande bord verandert, maar een **nieuw bord genereert**.
-
-Dit voorkomt onverwachte bijwerkingen en maakt het eenvoudiger om speltoestanden te analyseren.
-
----
-
-### Recursie
-
-In functionele talen wordt herhaling vaak gerealiseerd met **recursie** in plaats van lussen.
-
-Een recursieve functie roept zichzelf aan met een kleinere versie van het probleem totdat een basisgeval wordt bereikt.
-
-In deze opdracht zal recursie vooral gebruikt worden in:
-
-- het **minimax-algoritme**
-- het doorlopen van mogelijke speltoestanden
-
----
-
-### Pattern Matching
-
-Pattern matching is een techniek waarbij een functie verschillende uitvoeringen kan hebben afhankelijk van de structuur van de input.
-
-Dit kan bijvoorbeeld gebruikt worden om verschillende speltoestanden te herkennen, zoals:
-
-- winst
-- verlies
-- gelijkspel
-
----
-
-### Higher-Order Functions
-
-Higher-order functions zijn functies die andere functies als argument kunnen ontvangen of functies kunnen retourneren.
-
-Elixir bevat hiervoor verschillende standaardfuncties in de `Enum` module, zoals:
-
-- `Enum.map`
-- `Enum.reduce`
-- `Enum.filter`
-
-Deze functies maken het mogelijk om collecties op een declaratieve manier te verwerken.
+##### Higher-order functions  
+Functies uit de Enum module worden gebruikt om lijsten declaratief te verwerken.
 
 ---
 
@@ -249,9 +202,7 @@ Deze functies verwerken lijsten op een declaratieve manier. Hierdoor blijft de c
 
 ## Wincondities
 
-Om te bepalen of een speler gewonnen heeft, worden alle mogelijke winnende patronen gedefinieerd als data.
-
-Voor Tic-Tac-Toe zijn dit de volgende combinaties:
+De mogelijke winnende patronen worden als data opgeslagen:
 
 [0,1,2]  
 [3,4,5]  
@@ -262,28 +213,18 @@ Voor Tic-Tac-Toe zijn dit de volgende combinaties:
 [0,4,8]  
 [2,4,6]
 
-Door deze patronen als data te definiëren kan het programma eenvoudig controleren of een speler een winnende combinatie heeft.
-
-De functie `winner(board)` doorloopt deze patronen en controleert of drie posities dezelfde speler bevatten.
-
-Dit is een declaratieve aanpak: de regels van het spel worden eerst als data beschreven en daarna geëvalueerd door functies.
+De functie `winner(board)` controleert of een speler een van deze patronen bezit.
 
 ---
 
 ## Detectie van het einde van het spel
 
-Het programma moet kunnen bepalen wanneer een spel afgelopen is.
+Het spel eindigt wanneer:
 
-Dit gebeurt in de functie:
+- een speler gewonnen heeft
+- er geen geldige zetten meer zijn
 
-game_over?(board)
-
-Een spel eindigt wanneer:
-
-- een speler heeft gewonnen
-- er geen geldige zetten meer over zijn
-
-Deze functie combineert de resultaten van `winner(board)` en `valid_moves(board)` om te bepalen of het spel beëindigd moet worden.
+Dit wordt bepaald door de functie `game_over?(board)`, die zowel `winner(board)` als `valid_moves(board)` gebruikt.
 
 ---
 
@@ -303,83 +244,50 @@ Deze aanpak maakt het eenvoudig om verschillende gevallen te behandelen zonder c
 
 ## Recursie voor spelverloop
 
-Het spelverloop wordt geïmplementeerd met behulp van **recursie**.
+Het spelverloop wordt geïmplementeerd met recursie.  
+De functie `loop(board, player)` roept zichzelf opnieuw aan na iedere zet totdat het spel afgelopen is.
 
-In plaats van een traditionele lus (zoals een while-loop) wordt een functie gebruikt die zichzelf opnieuw aanroept totdat het spel afgelopen is.
+Elke zet produceert een nieuw bord, waardoor er geen mutabele state nodig is.
 
-De functie `loop(board, player)` voert de volgende stappen uit:
-
-- toon het huidige bord
-- vraag een zet aan de speler
-- genereer een nieuwe bordtoestand
-- wissel van speler
-- roep de functie opnieuw aan
-
-Wanneer het spel afgelopen is wordt de recursie beëindigd.
-
-Deze aanpak sluit goed aan bij het functionele paradigma, omdat:
-
-- er geen mutabele state nodig is
-- elke spelzet een nieuwe bordtoestand genereert
-- de spelstroom volledig wordt bepaald door functieresultaten
 ---
 
 ## Simpele AI strategie
 
-Voordat het minimax-algoritme wordt geïmplementeerd, is eerst een eenvoudige AI ontwikkeld.
+De eerste AI strategie kiest een willekeurige geldige zet.
 
-Deze AI kiest willekeurig een geldige zet uit alle beschikbare zetten op het bord.
-
-De functie in de AI module werkt als volgt:
-
-1. bepaal alle geldige zetten met `valid_moves(board)`
-2. kies willekeurig één van deze zetten
-3. voer deze zet uit
-
-De implementatie gebruikt hiervoor:
+De functie bepaalt eerst alle mogelijke zetten met `valid_moves(board)` en kiest daarna een willekeurige positie met:
 
 Enum.random(valid_moves)
 
-Deze eenvoudige strategie maakt het mogelijk om het spel al volledig te spelen tegen een computertegenstander. Tegelijkertijd vormt dit een goede basis voor de latere implementatie van het minimax-algoritme, waarbij de AI niet willekeurig maar strategisch optimale zetten kiest.
+Deze strategie maakt het mogelijk om het spel al tegen een computer te spelen voordat de strategische AI wordt toegevoegd.
 
 ---
 
 ## Minimax algoritme
 
-Na de implementatie van een eenvoudige AI werd het minimax-algoritme toegevoegd.
+Het minimax-algoritme onderzoekt alle mogelijke toekomstige speltoestanden om de beste zet te bepalen.
 
-Het minimax-algoritme onderzoekt alle mogelijke toekomstige speltoestanden om de beste zet te bepalen. Voor elke mogelijke zet wordt het spel verder gesimuleerd totdat een eindtoestand wordt bereikt.
+Eindtoestanden krijgen een score:
 
-Elke eindtoestand krijgt een score:
+- winst → 1
+- gelijkspel → 0
+- verlies → -1
 
-- winst voor de AI → score 1
-- gelijkspel → score 0
-- verlies voor de AI → score -1
-
-Door alle mogelijke zetten te evalueren kan de AI bepalen welke zet uiteindelijk de beste uitkomst oplevert.
-
-De implementatie maakt intensief gebruik van **recursie**. Voor elke mogelijke zet wordt de functie opnieuw aangeroepen met een nieuwe bordtoestand.
-
-Omdat elke zet een nieuw bord genereert en het oorspronkelijke bord onveranderd blijft, sluit deze aanpak goed aan bij het concept **immutability**.
+Het algoritme gebruikt recursie om alle mogelijke zetten te simuleren en kiest uiteindelijk de zet met de beste score.
 
 ---
-
 ## Moeilijkheidsniveaus
 
-Na de implementatie van het minimax-algoritme zijn meerdere moeilijkheidsniveaus toegevoegd aan de AI.
-
-De AI kan nu drie verschillende strategieën gebruiken:
+De AI ondersteunt drie moeilijkheidsniveaus.
 
 Easy  
-De AI kiest volledig willekeurige zetten uit alle geldige zetten.
+De AI kiest willekeurige zetten.
 
 Medium  
-De AI kiest soms een willekeurige zet en soms een zet gebaseerd op het minimax-algoritme.
+De AI combineert willekeurige zetten met minimax.
 
 Hard  
-De AI gebruikt altijd het minimax-algoritme en speelt daardoor optimaal.
-
-Door deze niveaus toe te voegen wordt het mogelijk om het verschil te zien tussen eenvoudige en strategische besluitvorming. Dit maakt het gedrag van het algoritme beter te analyseren.
+De AI gebruikt volledig minimax en speelt optimaal.
 
 ---
 
