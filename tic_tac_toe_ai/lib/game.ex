@@ -24,7 +24,7 @@ defmodule Game do
         if player == :x do
           ask_move(player)
         else
-          AI.random_move(board)
+          AI.best_move(board, player)
         end
 
       if position in Board.valid_moves(board) do
